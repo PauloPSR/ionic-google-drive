@@ -149,10 +149,20 @@ angular.module('starter')
            **/
 
           var deffer = $q.defer();
-          var request = gapi.client.drive.files.list({
-            'maxResults': 20
+         // PROBLEMS var request = gapi.client.drive.files.list({
+          //  'maxResults': 20
+          //});
+          
+          // FIX
+          //http://stackoverflow.com/questions/11315962/google-drive-api-javascript
+        var request = gapi.client.request({
+              'path': '/drive/v2/files',
+              'method': 'GET',
+              'params': { 'maxResults': '20' }
           });
-
+          
+          
+          
           request.execute(function (resp) {
             var files = resp.items;
             var read_files = [];
